@@ -1,0 +1,123 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Biblioteca</li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="card list-books">
+    <h5 class="card-header">Lista de livros</h5>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Título</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Data de Lançamento</th>
+            <th scope="col">Isbn</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td>{{ book.id }}</td>
+            <td>{{ book.titulo }}</td>
+            <td>{{ book.autor }}</td>
+            <td>{{ book.ano }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-warning btn-sm"
+                (click)="editBooks(book)"
+              >
+                Editar
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm ml-1"
+                (click)="deleteBooks(book)"
+              >
+                Deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card add-books">
+    <h5 class="card-header">Adicionar ou Atualizar livros</h5>
+    <div class="card-body">
+      <form
+        id="add-form"
+        (ngSubmit)="f.form.valid && saveBooks(f)"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input
+            type="text"
+            [(ngModel)]="book.titulo"
+            id="title"
+            name="title"
+            #model="ngModel"
+            required
+            class="form-control"
+            placeholder="Digite o Título do Livro"
+          />
+        </div>
+        <div class="form-group">
+          <label for="autor">Autor</label>
+          <input
+            type="text"
+            [(ngModel)]="book.autor"
+            id="autor"
+            name="autor"
+            #model="ngModel"
+            required
+            class="form-control"
+            placeholder="Digite o Nome do Autor"
+          />
+        </div>
+        <div class="form-group">
+          <label for="ano">Data de Lançamento</label>
+          <input
+            type="text"
+            [(ngModel)]="book.ano"
+            id="ano"
+            name="ano"
+            #model="ngModel"
+            required
+            class="form-control"
+            placeholder="Digite a Data de Lançamento"
+          />
+        </div>
+        <div class="form-group">
+          <label for="isbn">Isbn</label>
+          <input
+            type="text"
+            [(ngModel)]="book.isbn"
+            id="isbn"
+            name="isbn"
+            #model="ngModel"
+            required
+            class="form-control"
+            placeholder="Digite o Isbn do Livro"
+          />
+        </div>
+        <button type="submit" class="btn btn-outline-success btn-add-book">
+          Salvar
+        </button>
+        <button
+          type="reset"
+          class="btn btn-outline-dark btn-add-book"
+          (click)="cleanForm(f)"
+        >
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
